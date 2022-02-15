@@ -13,8 +13,8 @@ export type AnswerObject = {
   correct: boolean;
   correctAnswer: string;
 };
-
-const TOTAL_QUESTIONS = 10;
+const questions = 3
+const TOTAL_QUESTIONS = questions + 1;
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -82,14 +82,17 @@ const App: React.FC = () => {
         {loading ? <p>Loading Questions...</p> : null}
         {!loading && !gameOver && (
           <QuestionCard
-            questionNr={number + 1}
+            questionNr={number+1}
             totalQuestions={TOTAL_QUESTIONS}
             question={questions[number].question}
             answers={questions[number].answers}
             userAnswer={userAnswers ? userAnswers[number] : undefined}
             callback={checkAnswer}
+            score = {score}
           />
+          
         )}
+       
         {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
           <button className='next' onClick={nextQuestion}>
             Next Question

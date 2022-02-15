@@ -11,6 +11,7 @@ type Props = {
   userAnswer: AnswerObject | undefined;
   questionNr: number;
   totalQuestions: number;
+  score: number
 };
 
 const QuestionCard: React.FC<Props> = ({
@@ -19,26 +20,31 @@ const QuestionCard: React.FC<Props> = ({
   callback,
   userAnswer,
   questionNr,
-  totalQuestions,
+  totalQuestions, 
+  score
 }) => (
   <Wrapper>
-    <p className='number'>
-      Question: {questionNr} / {totalQuestions}
-    </p>
-    <p dangerouslySetInnerHTML={{ __html: question }} />
-    <div>
-      {answers.map((answer) => (
-        <ButtonWrapper
-          key={answer}
-          correct={userAnswer?.correctAnswer === answer}
-          userClicked={userAnswer?.answer === answer}
-        >
-          <button disabled={userAnswer ? true : false} value={answer} onClick={callback}>
-            <span dangerouslySetInnerHTML={{ __html: answer }} />
-          </button>
-        </ButtonWrapper>
-      ))}
+    {questionNr === totalQuestions ? (`You got Score ${score} for ${totalQuestions} Questions`) : (
+      <div>
+      <p className='number'>
+        Question: {questionNr} / {totalQuestions-1}
+      </p>
+      <p dangerouslySetInnerHTML={{ __html: question }} />
+      <div>
+        {answers.map((answer) => (
+          <ButtonWrapper
+            key={answer}
+            correct={userAnswer?.correctAnswer === answer}
+            userClicked={userAnswer?.answer === answer}
+          >
+            <button disabled={userAnswer ? true : false} value={answer} onClick={callback}>
+              <span dangerouslySetInnerHTML={{ __html: answer }} />
+            </button>
+          </ButtonWrapper>
+        ))}
+      </div>
     </div>
+    )}
   </Wrapper>
 );
 
