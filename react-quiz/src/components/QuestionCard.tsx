@@ -24,7 +24,7 @@ const QuestionCard: React.FC<Props> = ({
   score
 }) => (
   <Wrapper>
-    {questionNr === totalQuestions ? (`You got Score ${score} for ${totalQuestions} Questions`) : (
+    {questionNr === totalQuestions ? (`You got Score ${score} for ${totalQuestions-1} Questions`) : (
       <div>
       <p className='number'>
         Question: {questionNr} / {totalQuestions-1}
